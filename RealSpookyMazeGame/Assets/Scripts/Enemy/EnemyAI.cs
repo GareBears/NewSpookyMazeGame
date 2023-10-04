@@ -75,6 +75,18 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private void LightPlayer()
+    {
+        if (playerInLightRange)
+        {
+            lightFlicker.FlickerFalse();
+        }
+        else
+        {
+            lightFlicker.FlickerTrue();
+        }
+    }
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
@@ -105,10 +117,12 @@ public class EnemyAI : MonoBehaviour
     {
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatisPlayer); 
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatisPlayer);
+        playerInLightRange = Physics.CheckSphere(transform.position, lightRange, whatisPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        if (playerInLightRange) LightPlayer();
     }
 
     private void OnDrawGizmosSelected()
@@ -117,6 +131,8 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, lightRange);
     }
 
     IEnumerator Teleport()
