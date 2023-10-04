@@ -11,15 +11,17 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float playerHeight;
     public float groundDrag;
+    public float velocity;
     public LayerMask ground;
     bool grounded;
+    public bool isGrounded;
 
     public Transform orientation;
 
     float horizontalInput;
     float verticalInput;
 
-    Vector3 moveDirection;
+    public Vector3 moveDirection;
 
     Rigidbody rb;
 
