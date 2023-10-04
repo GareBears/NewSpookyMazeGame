@@ -19,8 +19,8 @@ public class EnemyAI : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
 
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    public float sightRange, attackRange, lightRange;
+    public bool playerInSightRange, playerInAttackRange, playerInLightRange;
 
     private void Awake()
     {
