@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform orientation;
 
+    private float Life = 3;
+
     float horizontalInput;
     float verticalInput;
 
@@ -78,6 +80,19 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    public void LoseLife()
+    {
+        if( Life > 0 )
+        {
+            Life = Life - 1;
+            Debug.Log("Ouch");
+        }
+        if( Life <= 0)
+        {
+            Debug.Log("DEAD");
         }
     }
 }

@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    PlayerController pcontroller;
+    FlickerControl lightFlicker;
+
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatisPlayer;
@@ -22,6 +25,8 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
+        pcontroller = GameObject.Find("Player").GetComponent<PlayerController>();
+        lightFlicker = GameObject.Find("PFlashLight").GetComponent <FlickerControl>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -44,6 +49,14 @@ public class EnemyAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        if (playerInSightRange)
+        {
+            lightFlicker.FlickerFalse();
+        }
+        else
+        {
+            lightFlicker.FlickerTrue();
+        }
     }
 
     private void AttackPlayer()
@@ -54,7 +67,9 @@ public class EnemyAI : MonoBehaviour
         if (!alreadyAttacked)
         {
             //ADD ATTACK HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            StartCoroutine("Teleport");
             Debug.Log("I found You");
+            pcontroller.LoseLife();
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
@@ -102,5 +117,11 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+
+    IEnumerator Teleport()
+    {
+        gameObject.transform.position = new Vector3(0f, 0f, 65f);
+        yield return new WaitForSeconds(0.01f);
     }
 }
