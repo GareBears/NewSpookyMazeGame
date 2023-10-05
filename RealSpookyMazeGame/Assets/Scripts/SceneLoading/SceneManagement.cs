@@ -59,5 +59,6 @@ public class SceneManagement : MonoBehaviour
     public void Level1(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1.0f;
     }
 }

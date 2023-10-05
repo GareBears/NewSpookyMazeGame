@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    GameManager gameManager;
+
     [Header("Movement")]
     [Header("Ground Check")]
     public float moveSpeed;
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
@@ -88,11 +91,10 @@ public class PlayerController : MonoBehaviour
         if( Life > 0 )
         {
             Life = Life - 1;
-            Debug.Log("Ouch");
         }
         if( Life <= 0)
         {
-            Debug.Log("DEAD");
+            gameManager.PlayerIsDead();
         }
     }
 }
