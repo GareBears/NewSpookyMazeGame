@@ -14,10 +14,12 @@ public class SceneManagement : MonoBehaviour
     public GameObject SettingsButton;
     public GameObject QuitButton;
 
+    GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -54,11 +56,13 @@ public class SceneManagement : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
         Time.timeScale = 1.0f;
+        gameManager.GameIsNotRunning();
     }
 
     public void Level1(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
         Time.timeScale = 1.0f;
+        gameManager.GameIsRunning();
     }
 }

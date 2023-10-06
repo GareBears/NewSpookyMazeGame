@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
-    private AudioListener listener;
 
     public float sensX;
     public float sensY;
@@ -17,8 +16,6 @@ public class PlayerCam : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        listener = GetComponent<AudioListener>();
-        listener.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -33,14 +30,5 @@ public class PlayerCam : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         oreientation.rotation = Quaternion.Euler(0, yRotation, 0);
-    }
-
-    public void DisableSound()
-    {
-        listener.enabled = !listener.enabled;
-    }
-    public void EnableSound()
-    {
-        listener.enabled = listener.enabled;
     }
 }

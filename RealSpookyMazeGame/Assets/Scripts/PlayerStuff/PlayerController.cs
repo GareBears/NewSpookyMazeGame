@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     GameManager gameManager;
+    private AudioSource audioplayer;
 
     [Header("Movement")]
     [Header("Ground Check")]
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask ground;
     bool grounded;
     public bool isGrounded;
+
+    public bool isPaused = false;
 
     public Transform orientation;
 
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody>();
+        audioplayer = GetComponent<AudioSource>();
         rb.freezeRotation = true;
     }
 
@@ -52,6 +56,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.drag = 0;
+        }
+        if (isPaused == true)
+        {
+            audioplayer.enabled = false;
+        }
+        else if (isPaused == false)
+        {
+            audioplayer.enabled = true;
         }
     }
 
@@ -96,5 +108,15 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.PlayerIsDead();
         }
+    }
+
+    public void PlayerPause()
+    {
+        isPaused = true;
+    }
+
+    public void PlayerUNPaused()
+    {
+        isPaused = false;
     }
 }

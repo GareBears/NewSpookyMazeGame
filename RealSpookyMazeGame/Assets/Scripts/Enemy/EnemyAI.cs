@@ -7,7 +7,11 @@ public class EnemyAI : MonoBehaviour
 {
     PlayerController pcontroller;
     FlickerControl lightFlicker;
+    GameManager gameManager;
 
+    private AudioSource audioplayer;
+    public bool ifpaused = false;
+    
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatisPlayer;
@@ -109,7 +113,8 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioplayer = GetComponent<AudioSource>();
+        audioplayer.enabled = true;
     }
 
     // Update is called once per frame
@@ -123,6 +128,15 @@ public class EnemyAI : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
         if (playerInLightRange) LightPlayer();
+
+        if (ifpaused == true)
+        {
+            audioplayer.enabled = false;
+        }
+        else if (ifpaused == false)
+        {
+            audioplayer.enabled = true;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -137,7 +151,17 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator Teleport()
     {
-        gameObject.transform.position = new Vector3(0f, 0f, 65f);
+        gameObject.transform.position = new Vector3(0f, 0f, 62.5f);
         yield return new WaitForSeconds(0.01f);
+    }
+
+    public void AudioPause()
+    {
+        ifpaused = true;
+    }
+
+    public void AudioUNPause()
+    {
+        ifpaused = false;
     }
 }
