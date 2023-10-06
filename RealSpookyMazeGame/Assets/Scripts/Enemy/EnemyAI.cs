@@ -53,14 +53,14 @@ public class EnemyAI : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
-        if (playerInSightRange)
-        {
-            lightFlicker.FlickerFalse();
-        }
-        else
-        {
-            lightFlicker.FlickerTrue();
-        }
+        //if (playerInSightRange)
+        //{
+            //lightFlicker.FlickerFalse();
+        //}
+        //else
+        //{
+            //lightFlicker.FlickerTrue();
+        //}
     }
 
     private void AttackPlayer()
