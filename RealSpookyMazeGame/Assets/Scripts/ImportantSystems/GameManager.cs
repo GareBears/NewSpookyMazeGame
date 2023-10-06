@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        //DontDestroyOnLoad(this.gameObject);
         enemyAI = GameObject.Find("Enemy").GetComponent<EnemyAI>();
         enemyAI.AudioUNPause();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();

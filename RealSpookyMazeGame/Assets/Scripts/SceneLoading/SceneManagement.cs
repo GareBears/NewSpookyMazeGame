@@ -14,7 +14,10 @@ public class SceneManagement : MonoBehaviour
     public GameObject SettingsButton;
     public GameObject QuitButton;
 
+    FlickerControl flickerControl;
     GameManager gameManager;
+
+    public bool isFlickeringOK = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,10 +25,24 @@ public class SceneManagement : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
+    public void Awake()
+    {
+        //DontDestroyOnLoad(this.gameObject);
+        flickerControl = GameObject.Find("PFlasLight").GetComponent<FlickerControl>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        flickerControl = GameObject.Find("PFlasLight").GetComponent<FlickerControl>();
+        if (isFlickeringOK == true)
+        {
+            flickerControl.FlickerOKSettings();
+        }
+        else if (isFlickeringOK == false)
+        {
+            flickerControl.FlickerNotOkSettings();
+        }
     }
 
     public void MainMenu()
@@ -45,6 +62,18 @@ public class SceneManagement : MonoBehaviour
         SettingsButton.SetActive(false);
         QuitButton.SetActive(false);
         settingsMenu.SetActive(true);
+    }
+
+    public void LightToggle()
+    {
+        if (isFlickeringOK == true)
+        {
+            isFlickeringOK = false;
+        }
+        else if (isFlickeringOK == false)
+        {
+            isFlickeringOK = true;
+        }
     }
 
     public void QuitGame()

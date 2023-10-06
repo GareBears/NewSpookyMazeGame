@@ -44,6 +44,11 @@ public class FlickerControl : MonoBehaviour
 
     public void FlickerOKSettings()
     {
+        flickerOK = true;
+    }
 
+    public void FlickerNotOkSettings()
+    {
+        flickerOK = false;
     }
 }
