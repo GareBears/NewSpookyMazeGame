@@ -24,6 +24,8 @@ public class EnemyAI : MonoBehaviour
     public float timeBetweenAttacks;
     bool alreadyAttacked;
 
+    AudioSource pianoSound;
+
     public float sightRange, attackRange, lightRange;
     public bool playerInSightRange, playerInAttackRange, playerInLightRange;
 
@@ -34,6 +36,7 @@ public class EnemyAI : MonoBehaviour
         lightFlicker = GameObject.Find("PFlashLight").GetComponent <FlickerControl>();
         sceneManagement = GameObject.Find("SceneManager").GetComponent<SceneManagement>();
         agent = GetComponent<NavMeshAgent>();
+        pianoSound = GetComponent<AudioSource>();
     }
 
     private void Patroling()
@@ -86,10 +89,12 @@ public class EnemyAI : MonoBehaviour
         if (playerInLightRange)
         {
             lightFlicker.FlickerFalse();
+            
         }
         else
         {
             lightFlicker.FlickerTrue();
+            //pianoSound.pitch = startingPitch;
         }
     }
 
@@ -117,6 +122,7 @@ public class EnemyAI : MonoBehaviour
     {
         audioplayer = GetComponent<AudioSource>();
         audioplayer.enabled = true;
+        pianoSound.pitch = 0.3f;
     }
 
     // Update is called once per frame

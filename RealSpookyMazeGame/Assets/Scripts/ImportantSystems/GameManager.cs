@@ -16,7 +16,11 @@ public class GameManager : MonoBehaviour
     public GameObject Life1;
     public GameObject Life2;
     public GameObject Life3;
+    public bool has3health = true;
+    public bool has2health = false;
+    public bool has1health = false;
 
+    private bool isPlayerAlive;
     private bool isPaused = false;
     private bool gameRunning = false;
 
@@ -54,28 +58,42 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.P))
         {
             PlayerIsDead();
+            //Life = 2;
+        }
+        if (Input.GetKey(KeyCode.J))
+        {
+            PlayerHasWon();
         }
         if (keys >= 3)
         {
             PlayerHasWon();
         }
-        if (Life == 3)
+
+        //LIFE COUNTERS//
+
+        if (Life == 3 && !isPaused)
         {
             Life1.SetActive(true);
             Life2.SetActive(true);
             Life3.SetActive(true);
+            has3health = true;
         }
-        else if (Life == 2)
+        else if (Life == 2 && !isPaused)
         {
             Life3.SetActive(false);
+            has3health = false;
+            has2health = true;
         }
-        else if (Life == 1)
+        else if (Life == 1 && !isPaused)
         {
             Life2.SetActive(false);
+            has2health = false;
+            has1health = true;
         }
-        else if (Life == 0)
+        else if (Life == 0 && !isPaused)
         {
             Life1.SetActive(false);
+            has1health = false;
         }
     }
 
@@ -97,6 +115,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+
+        Life1.SetActive(false);
+        Life2.SetActive(false);
+        Life3.SetActive(false);
+
         //yield return new WaitForSeconds(0.05f);
         //yield return null;
         isPaused = true;
@@ -110,6 +133,23 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        if(has3health == true)
+        {
+            Life1.SetActive(true);
+            Life2.SetActive(true);
+            Life3.SetActive(true);
+        }
+        else if (has2health == true)
+        {
+            Life1.SetActive(true);
+            Life2.SetActive(true);
+        }
+        else if (has1health == true)
+        {
+            Life1.SetActive(true);
+        }
+
         isPaused = false;
     }
 
@@ -126,6 +166,9 @@ public class GameManager : MonoBehaviour
         youAreDead.SetActive(true);
         Time.timeScale = 0f;
         Cursor.visible = true;
+        Life1.SetActive(false);
+        Life2.SetActive(false);
+        Life3.SetActive(false);
         isPaused = true;
     }
 
@@ -137,6 +180,9 @@ public class GameManager : MonoBehaviour
         youHaveWon.SetActive(true);
         Time.timeScale = 0f;
         Cursor.visible = true;
+        Life1.SetActive(false);
+        Life2.SetActive(false);
+        Life3.SetActive(false);
         isPaused = true;
     }
 
