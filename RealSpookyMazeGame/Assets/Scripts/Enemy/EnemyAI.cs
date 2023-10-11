@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
     PlayerController pcontroller;
     FlickerControl lightFlicker;
     GameManager gameManager;
+    SceneManagement sceneManagement;
 
     private AudioSource audioplayer;
     public bool ifpaused = false;
@@ -31,6 +32,7 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.Find("Player").transform;
         pcontroller = GameObject.Find("Player").GetComponent<PlayerController>();
         lightFlicker = GameObject.Find("PFlashLight").GetComponent <FlickerControl>();
+        sceneManagement = GameObject.Find("SceneManager").GetComponent<SceneManagement>();
         agent = GetComponent<NavMeshAgent>();
     }
 

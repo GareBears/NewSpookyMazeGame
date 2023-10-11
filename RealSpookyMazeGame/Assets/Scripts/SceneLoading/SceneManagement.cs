@@ -13,11 +13,15 @@ public class SceneManagement : MonoBehaviour
     public GameObject PlayButton;
     public GameObject SettingsButton;
     public GameObject QuitButton;
+    
 
     FlickerControl flickerControl;
     GameManager gameManager;
+    PlayerController playerController;
 
     public bool isFlickeringOK = true;
+
+    private float Life = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +33,7 @@ public class SceneManagement : MonoBehaviour
     {
         //DontDestroyOnLoad(this.gameObject);
         flickerControl = GameObject.Find("PFlasLight").GetComponent<FlickerControl>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -93,5 +98,6 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene(sceneName);
         Time.timeScale = 1.0f;
         gameManager.GameIsRunning();
+        Life = 3;
     }
 }

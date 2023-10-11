@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     GameManager gameManager;
+    SceneManagement sceneManagement;
     private AudioSource audioplayer;
 
     [Header("Movement")]
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        sceneManagement = GameObject.Find("SceneManager").GetComponent<SceneManagement>();
         rb = GetComponent<Rigidbody>();
         audioplayer = GetComponent<AudioSource>();
         rb.freezeRotation = true;
@@ -103,6 +105,7 @@ public class PlayerController : MonoBehaviour
         if( Life > 0 )
         {
             Life = Life - 1;
+            gameManager.LifeCount();
         }
         if( Life <= 0)
         {

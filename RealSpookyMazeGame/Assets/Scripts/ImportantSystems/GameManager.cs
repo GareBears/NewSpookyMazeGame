@@ -13,10 +13,15 @@ public class GameManager : MonoBehaviour
     EnemyAI enemyAI;
     PlayerController playerController;
 
+    public GameObject Life1;
+    public GameObject Life2;
+    public GameObject Life3;
+
     private bool isPaused = false;
     private bool gameRunning = false;
 
     private float keys = 0f;
+    private float Life = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -50,17 +55,27 @@ public class GameManager : MonoBehaviour
         {
             PlayerIsDead();
         }
-        //if (isPaused == true)
-        //{
-            //Cursor.lockState = CursorLockMode.Confined;
-        //}
-        //if (isPaused == false)
-        //{
-            //Cursor.lockState = CursorLockMode.Locked;
-        //}
         if (keys >= 3)
         {
             PlayerHasWon();
+        }
+        if (Life == 3)
+        {
+            Life1.SetActive(true);
+            Life2.SetActive(true);
+            Life3.SetActive(true);
+        }
+        else if (Life == 2)
+        {
+            Life3.SetActive(false);
+        }
+        else if (Life == 1)
+        {
+            Life2.SetActive(false);
+        }
+        else if (Life == 0)
+        {
+            Life1.SetActive(false);
         }
     }
 
@@ -98,19 +113,6 @@ public class GameManager : MonoBehaviour
         isPaused = false;
     }
 
-    //IEnumerator Resumegame()
-    //{
-    //enemyAI.AudioUNPause();
-    //playerController.PlayerUNPaused();
-    //pauseMenu.SetActive(false);
-    //Time.timeScale = 1f;
-    //Cursor.visible = false;
-    //Cursor.lockState = CursorLockMode.Locked;
-    //yield return new WaitForSeconds(0.05f);
-    //yield return null;
-    //isPaused = false;
-    //}
-
     public void ItemUpdate()
     {
         keys = keys + 1;
@@ -136,5 +138,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.visible = true;
         isPaused = true;
+    }
+
+    public void LifeCount()
+    {
+        Life = Life - 1;
     }
 }
