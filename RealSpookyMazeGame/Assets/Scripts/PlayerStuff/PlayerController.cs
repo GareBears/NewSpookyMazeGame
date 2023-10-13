@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         audioplayer = GetComponent<AudioSource>();
         rb.freezeRotation = true;
+        isPaused = false;
     }
 
     /////////////////////////////////////////////////////////////////////////////////

@@ -159,7 +159,7 @@ public class EnemyAI : MonoBehaviour
 
     IEnumerator Teleport()
     {
-        gameObject.transform.position = new Vector3(0f, 0f, 62.5f);
+        gameObject.transform.position = new Vector3(-94.25f, 0f, -19.75f);
         yield return new WaitForSeconds(0.01f);
     }
 

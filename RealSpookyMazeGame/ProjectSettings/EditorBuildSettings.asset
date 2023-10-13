@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SpookyLevel1.unity
     guid: 5e03906a9dce7c2488c7bc9c8f0e70b4
   - enabled: 1

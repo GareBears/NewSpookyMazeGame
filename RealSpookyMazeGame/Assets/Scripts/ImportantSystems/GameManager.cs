@@ -16,6 +16,9 @@ public class GameManager : MonoBehaviour
     public GameObject Life1;
     public GameObject Life2;
     public GameObject Life3;
+    public GameObject Key1;
+    public GameObject Key2;
+    public GameObject Key3;
     public bool has3health = true;
     public bool has2health = false;
     public bool has1health = false;
@@ -119,6 +122,9 @@ public class GameManager : MonoBehaviour
         Life1.SetActive(false);
         Life2.SetActive(false);
         Life3.SetActive(false);
+        Key1.SetActive(false);
+        Key2.SetActive(false);
+        Key3.SetActive(false);
 
         //yield return new WaitForSeconds(0.05f);
         //yield return null;
@@ -133,6 +139,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        Key1.SetActive(true);
+        Key2.SetActive(true);
+        Key3.SetActive(true);
 
         if(has3health == true)
         {
@@ -170,6 +180,7 @@ public class GameManager : MonoBehaviour
         Life2.SetActive(false);
         Life3.SetActive(false);
         isPaused = true;
+        playerController.PlayerPause();
     }
 
     public void PlayerHasWon()
@@ -184,6 +195,7 @@ public class GameManager : MonoBehaviour
         Life2.SetActive(false);
         Life3.SetActive(false);
         isPaused = true;
+        playerController.PlayerPause();
     }
 
     public void LifeCount()
